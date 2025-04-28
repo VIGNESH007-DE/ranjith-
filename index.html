@@ -34,13 +34,15 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
+    // Your full website URL after login
+    const redirectURL = "https://vr-project-sandy.vercel.app/"; // <-- PUT YOUR WEBSITE LINK HERE
+
     // Sign in button event
     document.getElementById("googleSignInBtn").addEventListener("click", function() {
       signInWithPopup(auth, provider)
         .then((result) => {
           console.log("User signed in:", result.user);
-          // ✅ Redirect after successful login
-          window.location.href = "home.html"; // <--- change this to your destination page
+          window.location.href = redirectURL; // ✅ Redirect to full website
         })
         .catch((error) => {
           console.error("Error during sign in:", error);
