@@ -14,32 +14,33 @@
   </div>
 
   <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+  <script type="module">
+    // Import firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-  <script>
-    // TODO: Replace with your Firebase project configuration
-  const firebaseConfig = {
-  apiKey: "AIzaSyCmzkmIkVAmWGI3PrqKzcRjE08RKT7BnCI",
-  authDomain: "login-form1-44264.firebaseapp.com",
-  projectId: "login-form1-44264",
-  storageBucket: "login-form1-44264.firebasestorage.app",
-  messagingSenderId: "321283240254",
-  appId: "1:321283240254:web:0387aa013cc90954d2fc6f"
-};
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmzkmIkVAmWGI3PrqKzcRjE08RKT7BnCI",
+      authDomain: "login-form1-44264.firebaseapp.com",
+      projectId: "login-form1-44264",
+      storageBucket: "login-form1-44264.firebasestorage.app",
+      messagingSenderId: "321283240254",
+      appId: "1:321283240254:web:0387aa013cc90954d2fc6f"
+    };
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-    // Sign in with Google
+    // Sign in button event
     document.getElementById("googleSignInBtn").addEventListener("click", function() {
-      auth.signInWithPopup(provider)
+      signInWithPopup(auth, provider)
         .then((result) => {
           console.log("User signed in:", result.user);
           // ✅ Redirect after successful login
-          window.location.href = "your-redirect-page.html"; // 🔥 Change this to your destination page
+          window.location.href = "home.html"; // <--- change this to your destination page
         })
         .catch((error) => {
           console.error("Error during sign in:", error);
