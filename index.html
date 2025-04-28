@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stroke Exercise App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Stroke Exercise App</h1>
+    <button id="googleSignInBtn">Sign In with Google</button>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+
+  <script>
+    // TODO: Replace with your Firebase project configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyCmzkmIkVAmWGI3PrqKzcRjE08RKT7BnCI",
+  authDomain: "login-form1-44264.firebaseapp.com",
+  projectId: "login-form1-44264",
+  storageBucket: "login-form1-44264.firebasestorage.app",
+  messagingSenderId: "321283240254",
+  appId: "1:321283240254:web:0387aa013cc90954d2fc6f"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    // Sign in with Google
+    document.getElementById("googleSignInBtn").addEventListener("click", function() {
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          console.log("User signed in:", result.user);
+          // ✅ Redirect after successful login
+          window.location.href = "your-redirect-page.html"; // 🔥 Change this to your destination page
+        })
+        .catch((error) => {
+          console.error("Error during sign in:", error);
+          alert(error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
